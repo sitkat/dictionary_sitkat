@@ -2,6 +2,7 @@ import 'package:dictionary_sitkat/data_base/data_base_helper.dart';
 import 'package:dictionary_sitkat/model/word.dart';
 import 'package:dictionary_sitkat/screens/create_word_screen.dart';
 import 'package:dictionary_sitkat/screens/detail_word_screen.dart';
+import 'package:dictionary_sitkat/screens/update_word_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -121,18 +122,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Icons.edit,
                                 color: Colors.green,
                               ),
-                              onPressed: () {},
-                              // {
-                              //   Navigator.of(context).push(MaterialPageRoute(
-                              //       builder: (context) =>
-                              //           WordUpdate(course)));
-                              // },
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => UpdateWord(word)));
+                              },
                             ),
                           ),
                         ],
                       ),
-                      onTap: ()
-                      {
+                      onTap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => DetailWord(word)));
                       },
