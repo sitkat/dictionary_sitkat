@@ -1,4 +1,5 @@
 import 'package:dictionary_sitkat/data_base/data_base_helper.dart';
+import 'package:dictionary_sitkat/localization/language.dart';
 import 'package:dictionary_sitkat/model/word.dart';
 import 'package:dictionary_sitkat/screens/create_word_screen.dart';
 import 'package:dictionary_sitkat/screens/detail_word_screen.dart';
@@ -64,11 +65,44 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Esperanto'),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () => Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => CreateWord())),
-          )
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton<Language>(
+              underline: const SizedBox(),
+              icon: const Icon(
+                Icons.language,
+                color: Colors.white,
+              ),
+              onChanged: (Language? language) async {
+                if (language != null) {
+                  // Locale _locale = await setLocale(language.languageCode);
+                  // MyApp.setLocale(context, _locale);
+                }
+              },
+              items: Language.languageList()
+                  .map<DropdownMenuItem<Language>>(
+                    (e) => DropdownMenuItem<Language>(
+                  value: e,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Text(
+                        e.flag,
+                        style: const TextStyle(fontSize: 30),
+                      ),
+                      Text(e.name)
+                    ],
+                  ),
+                ),
+              )
+                  .toList(),
+            ),
+          ),
+          // IconButton(
+          //   icon: Icon(Icons.language),
+          //   onPressed: () => Navigator.of(context)
+          //       .push(MaterialPageRoute(builder: (context) => CreateWord())),
+          // )
         ],
       ),
       body: Column(
@@ -137,6 +171,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   );
                 }),
+          ),
+          FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () => Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => CreateWord())),
           ),
         ],
       ),
